@@ -160,7 +160,7 @@ def plot_rul(pred=None, target=None,
         stddev=None,
         q1_3=None,
         same_scale=True,
-        figsize=figsize, autoclose=True):
+        figsize=figsize, autoclose=True, title=None):
     if autoclose:
         plt.close('all')
     plt.figure(figsize=figsize)
@@ -182,6 +182,7 @@ def plot_rul(pred=None, target=None,
             ax.fill_between(range(len(pred)),
                     q1_3[0], q1_3[1],
                     alpha=0.3, color='tab:blue', label='1st/3rd quartile')
+    plt.title(title)
     plt.legend()
     plt.tight_layout()
 
