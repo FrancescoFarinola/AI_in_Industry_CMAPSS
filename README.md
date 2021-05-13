@@ -1,1 +1,1 @@
-# AI_in_Industry_lecture_material
+# AI in Industry - CMAPSS
