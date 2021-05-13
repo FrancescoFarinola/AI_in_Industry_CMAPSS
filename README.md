@@ -18,52 +18,34 @@ What comes out is that there is likely no fault that arises suddently, but the l
 
 We can prove this by looking at the process of data generation:
 
-
-1.   Choose initial deterioration $(f_0, e_0)$ where $f_0 \in [0.99,1]$ and $e_0 \in [0.99,1]$. 
+1.   Choose initial deterioration *( f<sub>0</sub>, e<sub>0</sub> )* where *f<sub>0</sub>* &isin; [0.99,1] and *e<sub>0</sub>* &isin; [0.99,1]. 
 This initial wear can occur due to manufacturing and assembly variations and is modelled in flow and efficiencies of the various modules. Those values are taken from a random distribution, such that the maximum initial deterioration is bounded within 1% degradation of the healthy condition.
 
-2.   Impose an exponential rate of change for flow and efficiency loss for each dataset, denoting an otherwise unspecified fault with increasingly worsening effect as: 
+2.   Impose an exponential rate of change for flow and efficiency loss for each dataset, denoting an otherwise unspecified fault with increasingly worsening effect as: *h(t) =  1 - exp{at<sup>b</sup>}*
+
+     This results in the overall health index: *H(t)=g(e(t),f(t))*
+     varying as a function of time where:
+
+     *e(t)=1-d<sub>e</sub>-exp{a<sub>e(t)</sub> t<sup>b<sub>e(t)</sub></sup>}*
+
+     *f(t)=1-d<sub>f</sub>-exp{a<sub>f(t)</sub> t<sup>b<sub>f(t)</sub></sup>}*
 
 
-\begin{equation}
-  h(t) =  1 - exp\{at^b\}
-\end{equation}
+     and the function g is the minimum of all operative margins considered (Fan, HPC, HPT and EGT modules).
+     This randomly chosen direction and evolution of faults is constrained by:
 
+     *f, e &le; 1%*
 
-This results in the overall health index:
+     *a<sub>k</sub>* &isin; [0.001, 0.003]
+     
+     *b<sub>k</sub>* &isin; [1.4, 1.6], k=1,2.</p>
 
-\begin{equation}
-H(t)=g(e(t),f(t))
-\end{equation} 
-
-varying as a function of time where:
-
-\begin{equation}
-e(t)=1-d_e-exp\{a_e(t)t^{b_e(t)}\}
-\end{equation}
-\begin{equation}
-f(t)=1-d_f-exp\{a_f(t)t^{b_f(t)}\}
-\end{equation}
-
-and the function g is the minimum of all operative margins considered (Fan, HPC, HPT and EGT modules).
-This randomly chosen direction and evolution of faults is constrained by:
-
-\begin{equation}
-f,e \leq 1%,
-\end{equation}
-\begin{equation}
-a_k \in [0.001, 0.003]
-\end{equation}
-\begin{equation}
-b_k \in [1.4, 1.6], k=1,2.
-\end{equation}
-
-3. Stop when health H=0 (failure criterion).
+3. Stop when health *H=0* (failure criterion).
 
 4. Superimpose measurement noise to the output data.
 
 Also, in the data we are using, it is made explicit that degradation was intentionally made only on the HPC module.
 
-The proof is found in the step 2, where we see that the rate of damage increases exponentially based on the two parameters $a_k$ and $b_k$ where $a_k$ is the amount of wear of a particular module k at a certain time t and $b_k$ is the rate of time at which exponential degradation happens (a kind of speed of degradation regularizer).
+The proof is found in the step 2, where we see that the rate of damage increases exponentially based on the two parameters *a<sub>k</sub>* and *b<sub>k</sub>* where *a<sub>k</sub>* is the amount of wear of a particular module k at a certain time t and *b<sub>k</sub>* is the rate of time at which exponential degradation happens (a kind of speed of degradation regularizer).
 
 In conclusion, the health index almost reflects the generic behaviour of an exponential function. Thus, this is why in our predictions we have an initial 'plateau' and suddently it exponentially decreases.
